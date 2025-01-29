@@ -12,9 +12,9 @@ JOIN
   BIBLIOTHEQUE b ON e.id_2 = b.id_2
 WHERE 
   e.disponibilite = 'disponible'
-  AND b.id_2 != 'specific_library_id'
+  AND b.id_2 != 'id_biblio'
   AND EXISTS (
     SELECT 1 
     FROM ABONNE a 
-    WHERE a.id = 'specific_abonne_id'
+    WHERE a.id = 'id_abbone'
   );
