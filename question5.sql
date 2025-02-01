@@ -1,3 +1,5 @@
+/*Quels événements sont programmés dans une bibliothèque et quels abonnés ont déjà
+participé à des événements similaires ?*/
 SELECT 
   e.ISBN, 
   e.titre, 

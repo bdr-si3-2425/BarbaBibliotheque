@@ -57,14 +57,14 @@ CREATE TABLE BIBLIOTHEQUE (
 );
 
 CREATE TABLE BLACKLIST (
-  PRIMARY KEY (id_abonne),
+  PRIMARY KEY (id_abonne, date_deb),
   id_abonne VARCHAR(42) NOT NULL,
   date_deb  DATE,
   date_fin  DATE
 );
 
 CREATE TABLE COMMANDE (
-  PRIMARY KEY (id_biblio, id_edition),
+  PRIMARY KEY (id_biblio, id_edition, date),
   id_biblio  VARCHAR(42) NOT NULL,
   id_edition VARCHAR(42) NOT NULL,
   date       DATE,

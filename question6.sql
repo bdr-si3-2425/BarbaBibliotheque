@@ -1,3 +1,5 @@
+/*Quels ouvrages ou collections sont les plus populaires selon les abonnés d’une région
+spécifique ?*/
 SELECT e.ISBN, e.titre, COUNT(*) AS emprunt_count
 FROM EDITION e
 JOIN EMPRUNT em ON e.id = em.id_edition

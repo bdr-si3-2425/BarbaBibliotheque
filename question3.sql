@@ -1,3 +1,4 @@
+/*Quels ouvrages sont fréquemment transférés entre bibliothèques et quels délais sont associés ?*/
 SELECT 
   e.ISBN, 
   e.titre, 

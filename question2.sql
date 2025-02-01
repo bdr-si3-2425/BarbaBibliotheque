@@ -1,3 +1,5 @@
+/*Comment gérer l’intégration d’une nouvelle bibliothèque au réseau et l’attribution de ses
+ressources ?*/
 INSERT INTO BIBLIOTHEQUE (id_2, id_3, id, ville, adresse, code_postal, nom, capacite, note, nombre_ouvrage, id_4, id_5, id_6, date, description, cout)
 VALUES ('new_id_2', 'new_id_3', 'new_id', 'new_ville', 'new_adresse', 'new_code_postal', 'new_nom', 'new_capacite', 'new_note', 'new_nombre_ouvrage', 'new_id_4', 'new_id_5', 'new_id_6', 'new_date', 'new_description', 'new_cout');
 
