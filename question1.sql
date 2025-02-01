@@ -11,13 +11,14 @@ SELECT
 FROM 
   EDITION e
 JOIN 
-  BIBLIOTHEQUE b ON e.id_2 = b.id_2
+    POSSEDE p ON e.id_edition = p.id_edition
+JOIN
+    BIBLIOTHEQUE b ON p.id_biblio = b.id_biblio
 WHERE 
-  e.disponibilite = 'disponible'
-  AND b.id_2 != 'Bibliothèque Louis Nucéra'
+  e.disponibilite = 'Disponible'
+  AND b.id_biblio != 'BIB011'
   AND EXISTS (
     SELECT 1 
     FROM ABONNE a 
-    WHERE a.id = '5'
-    
+    WHERE a.id_abonne = 'AB017'
   );
