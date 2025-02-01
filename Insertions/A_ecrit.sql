@@ -1,0 +1,16 @@
+INSERT INTO A_ECRIT (id_auteur, id_oeuvre) VALUES
+('AU1', 'O1'),
+('AU1', 'O4'),
+('AU2', 'O2'),
+('AU2', 'O5'),
+('AU3', 'O7'),
+('AU3', 'O8'),
+('AU4', 'O3'),
+('AU5', 'O6'),
+('AU6', 'O9'),
+('AU7', 'O4'),
+('AU8', 'O3'),
+('AU9', 'O14'),
+('AU10', 'O10'),
+('AU11', 'O15'),
+('AU12', 'O12');
