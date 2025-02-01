@@ -164,11 +164,12 @@ CREATE TABLE SOUSCRIT (
 );
 
 CREATE TABLE TRANSFERT (
-  PRIMARY KEY (id_biblio_source, id_biblio_dest, id_edition),
+  PRIMARY KEY (id_biblio_source, id_biblio_dest, id_edition, date_debut, date_fin),
   id_biblio_source VARCHAR(42) NOT NULL,
   id_biblio_dest   VARCHAR(42) NOT NULL,
   id_edition       VARCHAR(42) NOT NULL,
-  date            DATE,
+  date_debut       DATE NOT NULL, 
+  date_fin         DATE NOT NULL, 
   description     VARCHAR(42),
   cout           VARCHAR(42)
 );
