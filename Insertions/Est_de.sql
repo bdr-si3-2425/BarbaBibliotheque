@@ -1,0 +1,13 @@
+INSERT INTO EST_DE (id_Pays, id_auteur) VALUES
+('FR', 'AU1'),  -- Victor Hugo (France)
+('FR', 'AU2'),  -- Émile Zola (France)
+('FR', 'AU3'),  -- Alexandre Dumas (France)
+('FR', 'AU4'),  -- Guy de Maupassant (France)
+('FR', 'AU5'),  -- Honoré de Balzac (France)
+('US', 'AU6'),  -- Brandon Sanderson (United States)
+('FR', 'AU7'),  -- Marcel Proust (France)
+('FR', 'AU8'),  -- Gustave Flaubert (France)
+('FR', 'AU9'),  -- Voltaire (France)
+('FR', 'AU10'), -- Jean-Paul Sartre (France)
+('FR', 'AU11'), -- Simone de Beauvoir (France)
+('FR', 'AU12'); -- Albert Camus (France)
