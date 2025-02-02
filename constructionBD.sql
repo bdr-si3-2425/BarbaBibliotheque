@@ -168,7 +168,8 @@ CREATE TABLE TRANSFERT (
   id_biblio_source VARCHAR(42) NOT NULL,
   id_biblio_dest   VARCHAR(42) NOT NULL,
   id_edition       VARCHAR(42) NOT NULL,
-  date            DATE,
+  date_arrivee            DATE,
+  date_depart             DATE,
   description     VARCHAR(42),
   cout           VARCHAR(42)
 );

@@ -12,7 +12,7 @@ INSERT INTO BLACKLIST (id_abonne, date_deb, date_fin) VALUES
 ('AB005', '2025-01-01', '2025-04-01'),  -- Currently active
 ('AB010', '2025-03-01', '2025-06-01'),  -- Starts in the future
 ('AB015', '2024-09-15', '2024-12-15'),  -- Already ended
-('AB020', '2025-02-01', '2025-05-01'),  -- Currently active
+('AB020', '2025-02-01', '2025-05-01'),  -- Currently active (this one is causing a problem)
 ('AB025', '2025-04-15', '2025-07-15'),  -- Starts in the future
 ('AB030', '2024-11-01', '2025-02-01'),  -- Currently active
 ('AB035', '2025-01-15', '2025-04-15'),  -- Currently active
