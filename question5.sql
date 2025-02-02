@@ -4,11 +4,11 @@ SELECT
   e.ISBN, 
   e.titre, 
   COUNT(*) AS transfer_count, 
-  AVG(DATEDIFF(t.date_arrivee, t.date_depart)) AS moyenne_retard_jours
+  AVG(t.date_fin- t.date_debut) AS moyenne_temps_transfer
 FROM 
   TRANSFERT t
 JOIN 
-  EDITION e ON t.id_edition = e.id
+  EDITION e USING (id_edition)
 GROUP BY 
   e.ISBN, 
   e.titre
