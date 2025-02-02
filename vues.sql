@@ -5,8 +5,7 @@ SELECT
   e.ISBN, 
   e.titre, 
   COUNT(em.id_emprunt) AS borrow_count
-FROM 
-  EMPRUNT em
+FROM EMPRUNT em
 JOIN 
   EDITION e ON em.id_edition = e.id
 JOIN 
@@ -17,5 +16,4 @@ GROUP BY
   e.ISBN, 
   e.titre;
 
--- Query the view
 SELECT * FROM MostBorrowedBooks ORDER BY borrow_count DESC;

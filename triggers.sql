@@ -10,7 +10,7 @@ CREATE TABLE EmpruntHistory (
   action_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE OR REPLACE FUNCTION log_emprunt_history() RETURNS TRIGGER AS $$
+CREATE FUNCTION log_emprunt_history() RETURNS TRIGGER AS $$
 BEGIN
   IF TG_OP = 'INSERT' THEN
     INSERT INTO EmpruntHistory (id_emprunt, id_abonne, id_edition, id_biblio, date_emprunt, action)
@@ -20,6 +20,10 @@ BEGIN
     VALUES (NEW.id_emprunt, NEW.id_abonne, NEW.id_edition, NEW.id_biblio, NEW.date_retour, 'RETURN');
   END IF;
   RETURN NEW;
+EXCEPTION
+WHEN OTHERS THEN
+  RAISE NOTICE 'Error logging emprunt history: %', SQLERRM;
+  RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;
 
