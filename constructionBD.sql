@@ -52,8 +52,8 @@ CREATE TABLE BIBLIOTHEQUE (
   code_postal    VARCHAR(42),
   nom           VARCHAR(42),
   capacite       VARCHAR(42),
-  note           VARCHAR(42),
-  nombre_ouvrage VARCHAR(42)
+  note           INT,
+  nombre_ouvrage INT
 );
 
 CREATE TABLE BLACKLIST (
@@ -87,7 +87,7 @@ CREATE TABLE EDITION (
   titre         VARCHAR(42),
   date_publi    DATE,
   format        VARCHAR(42),
-  nb_page       VARCHAR(42),
+  nb_page       INT,
   disponibilite VARCHAR(42),
   id_oeuvre     VARCHAR(42) NULL,
   id_editeur    VARCHAR(42) NOT NULL
@@ -115,7 +115,7 @@ CREATE TABLE OEUVRE (
   id_oeuvre    VARCHAR(42) NOT NULL,
   description  VARCHAR(42),
   genre        VARCHAR(42),
-  score        VARCHAR(42)
+  score        INT
 );
 
 CREATE TABLE ORGANISE (
@@ -142,7 +142,7 @@ CREATE TABLE POSSEDE (
   PRIMARY KEY (id_edition, id_biblio),
   id_edition  VARCHAR(42) NOT NULL,
   id_biblio   VARCHAR(42) NOT NULL,
-  quantite    VARCHAR(42)
+  quantite    INT
 );
 
 CREATE TABLE SERIE (
@@ -150,7 +150,7 @@ CREATE TABLE SERIE (
   id_oeuvre_1 VARCHAR(42) NOT NULL,
   id_oeuvre_2 VARCHAR(42) NOT NULL,
   nom         VARCHAR(42),
-  nb_livre    VARCHAR(42),
+  nb_livre    INT,
   genre       VARCHAR(42)
 );
 
@@ -171,7 +171,7 @@ CREATE TABLE TRANSFERT (
   date_debut       DATE NOT NULL, 
   date_fin         DATE NOT NULL, 
   description     VARCHAR(42),
-  cout           VARCHAR(42)
+  cout           INT
 );
 
 ALTER TABLE ABONNE ADD FOREIGN KEY (id_biblio_inscription) REFERENCES BIBLIOTHEQUE (id_biblio);

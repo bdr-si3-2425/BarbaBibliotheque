@@ -1,4 +1,4 @@
-INSERT INTO TRANSFERT (id_biblio_source, id_biblio_dest, id_edition, start_date, end_date, description, cout) VALUES
+INSERT INTO TRANSFERT (id_biblio_source, id_biblio_dest, id_edition, date_debut, date_fin, description, cout) VALUES
 ('BIB001', 'BIB002', 'EDT1', '2024-05-01', '2024-05-15', 'Transfert de roman classique', '50'),
 ('BIB003', 'BIB004', 'EDT2', '2024-06-15', '2024-06-30', 'Transfert dessai philosophique', '30'),
 ('BIB005', 'BIB006', 'EDT3', '2024-07-20', '2024-07-30', 'Transfert de théâtre classique', '40'),
@@ -22,5 +22,5 @@ INSERT INTO TRANSFERT (id_biblio_source, id_biblio_dest, id_edition, start_date,
 ('BIB020', 'BIB015', 'EDT9', '2024-01-01', '2024-01-15', 'Transfert de biographie', '115'), 
 ('BIB001', 'BIB012', 'EDT10', '2024-02-01', '2024-02-15', 'Transfert de roman de science-fiction', '95'), 
 ('BIB019', 'BIB014', 'EDT1', '2024-03-01', '2024-03-15', 'Transfert de roman classique', '-20'), -- Negative cost
-('BIB007', 'BIB018', 'EDT2', '2024-04-01', '2023-04-15', 'Transfert dessai philosophique', '85'); --end date before start date: edge case problem
+('BIB007', 'BIB018', 'EDT2', '2024-04-01', '2024id_biblio_dest-04-15', 'Transfert dessai philosophique', '85'); --end date before start date: edge case problem
 
