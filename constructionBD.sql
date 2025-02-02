@@ -4,9 +4,10 @@ CREATE TABLE ABONNE (
   nom            VARCHAR(42),
   prenom         VARCHAR(42),
   email          VARCHAR(42),
-  date_naissance DATE,
+  date_naissance DATE, 
   lieu_naissance VARCHAR(42),
-  region         VARCHAR(42)
+  region         VARCHAR(42),
+  CONSTRAINT chk_dates CHECK (date_naissance <= CURRENT_DATE)
 );
 
 CREATE TABLE ATTENTE (
@@ -30,7 +31,8 @@ CREATE TABLE AUTEUR (
   pseudo         VARCHAR(42),
   date_naissance DATE,
   lieu_naissance VARCHAR(42),
-  date_mort      DATE
+  date_mort      DATE,
+  CONSTRAINT chk_dates CHECK (date_naissance <= CURRENT_DATE)
 );
 
 CREATE TABLE A_ECRIT (
@@ -55,7 +57,9 @@ CREATE TABLE BLACKLIST (
   PRIMARY KEY (id_abonne, date_deb),
   id_abonne VARCHAR(42) NOT NULL,
   date_deb  DATE,
-  date_fin  DATE
+  date_fin  DATE,
+  CONSTRAINT chk_dates CHECK (date_fin >= date_deb)
+  CONSTRAINT chk_dates2 CHECK (date_deb <= CURRENT_DATE)
 );
 
 CREATE TABLE COMMANDE (
@@ -63,7 +67,8 @@ CREATE TABLE COMMANDE (
   id_biblio  VARCHAR(42) NOT NULL,
   id_edition VARCHAR(42) NOT NULL,
   date       DATE,
-  raison     VARCHAR(42)
+  raison     VARCHAR(42),
+  CONSTRAINT chk_dates CHECK (date <= CURRENT_DATE)
 );
 
 CREATE TABLE EDITEUR (
@@ -85,7 +90,8 @@ CREATE TABLE EDITION (
   nb_page       INT,
   disponibilite VARCHAR(42),
   id_oeuvre     VARCHAR(42) NULL,
-  id_editeur    VARCHAR(42) NOT NULL
+  id_editeur    VARCHAR(42) NOT NULL,
+  CONSTRAINT chk_dates CHECK (date_publi <= CURRENT_DATE)
 );
 
 CREATE TABLE EVENEMENT (
@@ -96,7 +102,9 @@ CREATE TABLE EVENEMENT (
   adresse      VARCHAR(42),
   ville        VARCHAR(42),
   date_deb     DATE,
-  date_fin     DATE
+  date_fin     DATE,
+  CONSTRAINT chk_dates CHECK (date_fin >= date_deb)
+  CONSTRAINT chk_dates2 CHECK (date_naissance <= CURRENT_DATE)
 );
 
 CREATE TABLE EST_DE (
@@ -109,11 +117,14 @@ CREATE TABLE EMPRUNT (
   PRIMARY KEY (id_edition, id_abonne),
   id_edition   VARCHAR(42) NOT NULL,
   id_abonne    VARCHAR(42) NOT NULL,
-  date_emprunt DATE,
-  date_prevu   DATE,
-  date_retour  DATE,
-  etat_init    VARCHAR(42),
-  etat_retour  VARCHAR(42)
+  date_emprunt DATE NOT NULL,
+  date_prevu   DATE NOT NULL,
+  date_retour  DATE, 
+  etat_init    VARCHAR(42) NOT NULL, 
+  etat_retour  VARCHAR(42),
+  CONSTRAINT chk_dates CHECK (date_prevu IS NULL OR date_prevu >= date_emprunt),
+  CONSTRAINT chk_dates2 CHECK (date_retour IS NULL OR date_retour >= date_emprunt),
+  CONSTRAINT chk_dates CHECK (date_emprunt <= CURRENT_DATE),
 );
 
 CREATE TABLE OEUVRE (
@@ -148,7 +159,8 @@ CREATE TABLE POSSEDE (
   PRIMARY KEY (id_edition, id_biblio),
   id_edition  VARCHAR(42) NOT NULL,
   id_biblio   VARCHAR(42) NOT NULL,
-  quantite    INT
+  quantite    INT,
+  CONSTRAINT chk_quantite CHECK (0 <= quantite)
 );
 
 CREATE TABLE SERIE (
@@ -157,16 +169,19 @@ CREATE TABLE SERIE (
   id_oeuvre_2 VARCHAR(42) NOT NULL,
   nom         VARCHAR(42),
   nb_livre    INT,
-  genre       VARCHAR(42)
+  genre       VARCHAR(42),
+  CONSTRAINT chk_quantite CHECK (0 <= nb_livre)
 );
 
 CREATE TABLE SOUSCRIT (
   PRIMARY KEY (id_abonne, id_biblio),
   id_abonne         VARCHAR(42) NOT NULL,
   id_biblio         VARCHAR(42) NOT NULL,
-  debut_abonnement  DATE,
+  debut_abonnement  DATE NOT NULL,
   fin_abonnement    DATE,
   souscription      VARCHAR(42)
+  CONSTRAINT chk_dates CHECK (fin_abonnement >= debut_abonnement)
+  CONSTRAINT chk_dates CHECK (debut_abonnement <= CURRENT_DATE)
 );
 
 CREATE TABLE TRANSFERT (
@@ -178,6 +193,9 @@ CREATE TABLE TRANSFERT (
   date_fin         DATE NOT NULL, 
   description     VARCHAR(42),
   cout           INT
+  CONSTRAINT chk_dates CHECK (date_fin >= date_debut)
+  CONSTRAINT chk_dates CHECK (date_debut <= CURRENT_DATE)
+  CONSTRAINT chk_quantite CHECK (0 <= count)
 );
 
 ALTER TABLE ASSISTE ADD FOREIGN KEY (id_evenement) REFERENCES EVENEMENT (id_evenement);
