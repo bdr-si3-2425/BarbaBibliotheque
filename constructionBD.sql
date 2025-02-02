@@ -1,24 +1,19 @@
 CREATE TABLE ABONNE (
   PRIMARY KEY (id_abonne),
-  id_abonne       VARCHAR(42) NOT NULL,
+  id_abonne      VARCHAR(42) NOT NULL,
   nom            VARCHAR(42),
   prenom         VARCHAR(42),
   email          VARCHAR(42),
   date_naissance DATE,
   lieu_naissance VARCHAR(42),
-  region         VARCHAR(42),
-  id_edition     VARCHAR(42) NOT NULL,
-  id_biblio_emprunt VARCHAR(42) NOT NULL,
-  rang           VARCHAR(42),
-  id_edition_empruntee VARCHAR(42) NOT NULL,
-  id_biblio_inscription VARCHAR(42) NOT NULL,
-  date_emprunt   DATE,
-  date_prevu     DATE,
-  date_retour    DATE,
-  etat_init      VARCHAR(42),
-  etat_retour    VARCHAR(42),
-  UNIQUE (id_biblio_emprunt),
-  UNIQUE (id_biblio_inscription)
+  region         VARCHAR(42)
+);
+
+CREATE TABLE ATTENTE (
+  PRIMARY KEY (id_edition, id_abonne),
+  id_edition VARCHAR(42) NOT NULL,
+  id_abonne VARCHAR(42) NOT NULL,
+  rang INT
 );
 
 CREATE TABLE ASSISTE (
@@ -110,12 +105,23 @@ CREATE TABLE EST_DE (
   id_auteur      VARCHAR(42) NOT NULL
 );
 
+CREATE TABLE EMPRUNT (
+  PRIMARY KEY (id_edition, id_abonne),
+  id_edition   VARCHAR(42) NOT NULL,
+  id_abonne    VARCHAR(42) NOT NULL,
+  date_emprunt DATE,
+  date_prevu   DATE,
+  date_retour  DATE,
+  etat_init    VARCHAR(42),
+  etat_retour  VARCHAR(42)
+);
+
 CREATE TABLE OEUVRE (
   PRIMARY KEY (id_oeuvre),
   id_oeuvre    VARCHAR(42) NOT NULL,
   description  VARCHAR(42),
   genre        VARCHAR(42),
-  score        INT
+  score        FLOAT
 );
 
 CREATE TABLE ORGANISE (
@@ -174,13 +180,11 @@ CREATE TABLE TRANSFERT (
   cout           INT
 );
 
-ALTER TABLE ABONNE ADD FOREIGN KEY (id_biblio_inscription) REFERENCES BIBLIOTHEQUE (id_biblio);
-ALTER TABLE ABONNE ADD FOREIGN KEY (id_edition_empruntee) REFERENCES EDITION (id_edition);
-ALTER TABLE ABONNE ADD FOREIGN KEY (id_biblio_emprunt) REFERENCES BIBLIOTHEQUE (id_biblio);
-ALTER TABLE ABONNE ADD FOREIGN KEY (id_edition) REFERENCES EDITION (id_edition);
-
 ALTER TABLE ASSISTE ADD FOREIGN KEY (id_evenement) REFERENCES EVENEMENT (id_evenement);
 ALTER TABLE ASSISTE ADD FOREIGN KEY (id_abonne) REFERENCES ABONNE (id_abonne);
+
+ALTER TABLE ATTENTE ADD FOREIGN KEY (id_abonne) REFERENCES ABONNE (id_abonne);
+ALTER TABLE ATTENTE ADD FOREIGN KEY (id_edition) REFERENCES EDITION (id_edition);
 
 ALTER TABLE A_ECRIT ADD FOREIGN KEY (id_oeuvre) REFERENCES OEUVRE (id_oeuvre);
 ALTER TABLE A_ECRIT ADD FOREIGN KEY (id_auteur) REFERENCES AUTEUR (id_auteur);
@@ -194,6 +198,9 @@ ALTER TABLE EDITEUR ADD FOREIGN KEY (id_pays) REFERENCES PAYS (id_pays);
 
 ALTER TABLE EDITION ADD FOREIGN KEY (id_editeur) REFERENCES EDITEUR (id_editeur);
 ALTER TABLE EDITION ADD FOREIGN KEY (id_oeuvre) REFERENCES OEUVRE (id_oeuvre);
+
+ALTER TABLE EMPRUNT ADD FOREIGN KEY (id_abonne) REFERENCES ABONNE (id_abonne);
+ALTER TABLE EMPRUNT ADD FOREIGN KEY (id_edition) REFERENCES EDITION (id_edition);
 
 ALTER TABLE EST_DE ADD FOREIGN KEY (id_auteur) REFERENCES AUTEUR (id_auteur);
 ALTER TABLE EST_DE ADD FOREIGN KEY (id_Pays) REFERENCES PAYS (id_Pays);
