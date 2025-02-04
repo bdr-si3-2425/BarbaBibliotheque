@@ -1,5 +1,9 @@
 /*Comment optimiser les transferts d’ouvrages pour minimiser les coûts logistiques ?*/
-SELECT 
+/*
+Analyse les transferts d’ouvrages entre bibliothèques.
+Compte le nombre total de transferts et calcule le coût moyen de chaque itinéraire.
+Trie par nombre de transferts décroissant et par coût moyen croissant pour optimiser les trajets.
+*/SELECT 
   t.id_biblio_source,
   t.id_biblio_dest,
   COUNT(*) AS total_transfers, 
