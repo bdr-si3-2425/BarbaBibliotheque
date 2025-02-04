@@ -15,6 +15,7 @@ INSERT INTO ABONNE (id_abonne, nom, prenom, email, date_naissance, lieu_naissanc
 ('AB014', 'Girard', 'Louis', 'louis.girard@hotmail.com', '1984-02-28', 'Brest', 'Bretagne'),
 ('AB015', 'Andre', 'Claire', 'claire.andre@hotmail.com', '1993-03-30', 'Grenoble', 'Auvergne-Rhône-Alpes'),
 ('AB016', 'Lemoine', 'Hugo', 'hugo.lemoine@hotmail.com', '1989-04-15', 'Saint-Etienne', 'Auvergne-Rhône-Alpes'),
+('AB017', 'Dupuis', 'Emma', 'emma.dupuis@hotmail.com', '1994-05-20', 'Toulon', 'Provence-Alpes-Côte d''Azur'), --l'apostrophe dans l'Azur est échappé par un autre apostrophe
 ('AB018', 'Marchand', 'Lucas', 'lucas.marchand@hotmail.com', '1986-06-25', 'Angers', 'Pays de la Loire'),
 ('AB019', 'Dumont', 'Alice', 'alice.dumont@hotmail.com', '1996-07-30', 'Tours', 'Centre-Val de Loire'),
 ('AB020', 'Brun', 'Thomas', 'thomas.brun@hotmail.com', '1981-08-10', 'Nîmes', 'Occitanie'),
@@ -58,6 +59,7 @@ INSERT INTO AUTEUR (id_auteur, nom, prenom, pseudo, date_naissance, lieu_naissan
 INSERT INTO BIBLIOTHEQUE (id_biblio, ville, adresse, code_postal, nom, capacite) VALUES
 ('BIB001', 'Paris', '123 Rue de Paris', '75001', 'Bibliothèque Nationale de France', '100000'),
 ('BIB002', 'Lyon', '456 Rue de Lyon', '69001', 'Bibliothèque Municipale de Lyon', '50000'),
+('BIB003', 'Marseille', '789 Rue de Marseille', '13001', 'Bibliothèque de l''Alcazar', '30000'), --l'apostrophe dans l'Alcazar est échappé par un autre apostrophe
 ('BIB004', 'Toulouse', '101 Rue de Toulouse', '31000', 'Bibliothèque d''Étude et du Patrimoine', '20000'),
 ('BIB005', 'Nice', '202 Rue de Nice', '06000', 'Bibliothèque Louis Nucéra', '15000'),
 ('BIB006', 'Nantes', '1 Rue de Nantes', '44000', 'Bibliothèque de Nantes', '25000'),
@@ -188,7 +190,9 @@ INSERT INTO BLACKLIST (id_abonne, date_deb, date_fin) VALUES
 ('AB040', '2025-02-01', '2025-05-01'),
 ('AB001', '2024-10-01', '2025-01-01'),  -- Already ended
 ('AB005', '2025-01-01', '2025-04-01'),  -- Currently active
+('AB010', '2025-03-01', '2025-06-01'),  -- Starts in the future
 ('AB015', '2024-09-15', '2024-12-15'),  -- Already ended
+('AB025', '2025-04-15', '2025-07-15'),  -- Starts in the future
 ('AB030', '2024-11-01', '2025-02-01'),  -- Currently active
 ('AB035', '2025-01-15', '2025-04-15'),  -- Currently active
 ('AB040', '2024-12-01', '2025-03-01');  -- Currently active
@@ -341,8 +345,12 @@ INSERT INTO SOUSCRIT (id_abonne, id_biblio, debut_abonnement, fin_abonnement, so
 ('AB039', 'BIB020', '2023-01-01', '2023-12-31', 'Annuel'),
 ('AB040', 'BIB001', '2023-02-01', '2024-02-01', 'Annuel'),
 ('AB040', 'BIB002', '2023-03-01', '2023-09-01', 'Semestriel'),
-('AB040', 'BIB003', '2023-04-01', '2023-10-01', 'Semestriel');
-
+('AB040', 'BIB003', '2023-04-01', '2023-10-01', 'Semestriel'),
+('AB002', 'BIB004', '2025-02-01', '2025-08-01', 'Semestriel'),  -- Future subscription
+('AB010', 'BIB006', '2025-03-01', '2025-09-01', 'Semestriel'),  -- Future subscription
+('AB015', 'BIB008', '2025-04-01', '2025-10-01', 'Semestriel'),  -- Future subscription
+('AB020', 'BIB010', '2025-05-01', '2026-05-01', 'Annuel'),  -- Future subscription
+('AB025', 'BIB012', '2025-06-01', '2026-06-01', 'Annuel'); -- Future subscription
 
 INSERT INTO TRANSFERT (id_biblio_source, id_biblio_dest, id_edition, date_debut, date_fin, description, cout) VALUES
 ('BIB001', 'BIB002', 'EDT1', '2024-05-01', '2024-05-15', 'Transfert de roman classique', '50'),
@@ -353,6 +361,7 @@ INSERT INTO TRANSFERT (id_biblio_source, id_biblio_dest, id_edition, date_debut,
 ('BIB002', 'BIB001', 'EDT6', '2024-10-05', '2024-10-20', 'Transfert de poésie', '25'),
 ('BIB011', 'BIB012', 'EDT7', '2024-11-10', '2024-11-25', 'Transfert de thriller', '20'),
 ('BIB013', 'BIB014', 'EDT8', '2024-12-15', '2024-12-30', 'Transfert de manuel philosophique', '60'),
+('BIB015', 'BIB016', 'EDT9', '2025-01-01', '2025-01-15', 'Transfert de biographie', '-10'), -- Negative cost
 ('BIB017', 'BIB018', 'EDT10', '2025-02-01', '2025-02-15', 'Transfert de roman de science-fiction', '70'),
 ('BIB001', 'BIB019', 'EDT1', '2025-03-01', '2025-03-15', 'Transfert de roman classique', '100'),
 ('BIB002', 'BIB020', 'EDT1', '2025-04-01', '2025-04-15', 'Transfert dessai philosophique', '80'),
@@ -366,6 +375,8 @@ INSERT INTO TRANSFERT (id_biblio_source, id_biblio_dest, id_edition, date_debut,
 ('BIB018', 'BIB011', 'EDT8', '2023-12-01', '2023-12-15', 'Transfert de manuel philosophique', '105'), -- Future dates
 ('BIB020', 'BIB015', 'EDT9', '2024-01-01', '2024-01-15', 'Transfert de biographie', '115'), 
 ('BIB001', 'BIB012', 'EDT10', '2024-02-01', '2024-02-15', 'Transfert de roman de science-fiction', '95'), 
+('BIB019', 'BIB014', 'EDT1', '2024-03-01', '2024-03-15', 'Transfert de roman classique', '-20'), -- Negative cost
+('BIB007', 'BIB018', 'EDT2', '2024-04-01', '2024-04-15', 'Transfert dessai philosophique', '85'); --end date before start date: edge case problem
 
 INSERT INTO EMPRUNT (id_edition, id_abonne, date_emprunt, date_prevu, date_retour, etat_init, etat_retour)
 VALUES 
