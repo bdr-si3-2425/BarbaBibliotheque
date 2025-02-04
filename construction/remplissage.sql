@@ -285,7 +285,6 @@ INSERT INTO POSSEDE (id_edition, id_biblio, quantite) VALUES
 ('EDT1', 'BIB020', '1'), -- Multiple libraries own this edition
 ('EDT3', 'BIB010', '2'), -- Multiple libraries own this edition
 ('EDT6', 'BIB001', '4'), -- Multiple libraries own this edition
-('EDT8', 'BIB002', '-5'), -- Multiple libraries own this edition
 ('EDT9', 'BIB003', '2'); -- Multiple libraries own this edition
 
 INSERT INTO SERIE (id_oeuvre_1, id_oeuvre_2, nom, nb_livre, genre) VALUES
@@ -363,8 +362,6 @@ INSERT INTO TRANSFERT (id_biblio_source, id_biblio_dest, id_edition, date_debut,
 ('BIB013', 'BIB014', 'EDT8', '2024-12-15', '2024-12-30', 'Transfert de manuel philosophique', '60'),
 ('BIB015', 'BIB016', 'EDT9', '2025-01-01', '2025-01-15', 'Transfert de biographie', '-10'), -- Negative cost
 ('BIB017', 'BIB018', 'EDT10', '2025-02-01', '2025-02-15', 'Transfert de roman de science-fiction', '70'),
-('BIB001', 'BIB019', 'EDT1', '2025-03-01', '2025-03-15', 'Transfert de roman classique', '100'),
-('BIB002', 'BIB020', 'EDT1', '2025-04-01', '2025-04-15', 'Transfert dessai philosophique', '80'),
 ('BIB005', 'BIB007', 'EDT1', '2023-05-01', '2023-05-15', 'Transfert de roman classique', '90'), -- Multiple editions to the same library
 ('BIB005', 'BIB007', 'EDT3', '2023-06-01', '2023-06-15', 'Transfert de théâtre classique', '110'), -- Multiple editions to the same library
 ('BIB006', 'BIB010', 'EDT2', '2023-07-01', '2023-07-15', 'Transfert dessai philosophique', '75'),
@@ -376,18 +373,15 @@ INSERT INTO TRANSFERT (id_biblio_source, id_biblio_dest, id_edition, date_debut,
 ('BIB020', 'BIB015', 'EDT9', '2024-01-01', '2024-01-15', 'Transfert de biographie', '115'), 
 ('BIB001', 'BIB012', 'EDT10', '2024-02-01', '2024-02-15', 'Transfert de roman de science-fiction', '95'), 
 ('BIB019', 'BIB014', 'EDT1', '2024-03-01', '2024-03-15', 'Transfert de roman classique', '-20'), -- Negative cost
-('BIB007', 'BIB018', 'EDT2', '2024-04-01', '2024-04-15', 'Transfert dessai philosophique', '85'); --end date before start date: edge case problem
 
 INSERT INTO EMPRUNT (id_edition, id_abonne, date_emprunt, date_prevu, date_retour, etat_init, etat_retour)
 VALUES 
  ('EDT1', 'AB001', '2025-01-01', '2025-02-01', '2025-01-20', 'Bon état', 'Bon état'), -- Example 1: Regular borrowing
  ('EDT2', 'AB002', '2025-02-03', '2025-03-01', NULL, 'Neuf', NULL), -- Example 2: Book borrowed and not yet returned
  ('EDT3', 'AB003', '2025-01-10', '2025-02-10', '2025-02-05', 'Bon état', 'Bon état'),
- ('EDT3', 'AB004', '2025-02-20', '2025-03-20', NULL, 'Bon état', NULL), -- Example 3: Multiple borrowings by different users
- ('EDT4', 'AB005', '2025-03-01', '2025-04-01', NULL, 'Neuf', NULL),-- Example 4: Future borrowings
+ ('EDT9','AB014', '25-01-10','25-01-25','25-01-25','Bon état', 'Bon état'),
+ ('EDT8','AB010','25-01-10','25-01-25','25-01-25','Bon état', 'Bon état'),
  ('EDT6', 'AB007', '2025-01-20', '2025-02-20', '2025-02-15', 'Neuf', 'Abîmé'), -- Example 6: Damaged book return
- ('EDT7', 'AB008', '2025-02-05', '2025-02-10', '2025-02-08', 'Bon état', 'Bon état'), -- Example 7: Short borrow duration
  ('EDT8', 'AB009', '2025-01-01', '2025-06-01', '2025-05-25', 'Neuf', 'Bon état'), -- Example 8: Long borrow duration
  ('EDT9', 'AB010', '2025-01-15', '2025-02-15', '2025-02-05', 'Ancien', 'Ancien'),-- Example 9: Borrowing of a very old edition
- ('EDT10', 'AB001', '2025-02-15', '2025-03-15', NULL, 'Bon état', NULL),
  ('EDT2', 'AB001', '2025-01-01', '2025-02-01', '2025-02-02', 'Bon état', 'Bon état') -- Example 10: Returning late
