@@ -1,3 +1,9 @@
+/*
+Crée une vue qui affiche les livres les plus empruntés par bibliothèque et région.
+sql
+
+*/
+
 CREATE VIEW MostBorrowedBooks AS
 SELECT 
   b.region, 
@@ -16,4 +22,7 @@ GROUP BY
   e.ISBN, 
   e.titre;
 
+/*
+Sélectionne les résultats en classant les livres les plus empruntés.
+*/
 SELECT * FROM MostBorrowedBooks ORDER BY borrow_count DESC;

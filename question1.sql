@@ -1,5 +1,11 @@
 /*Quels ouvrages sont disponibles dans le réseau et peuvent être transférés à une bibliothèque
 donnée pour un abonné spécifique ?*/
+
+
+/*
+Sélectionne les ouvrages disponibles dans d’autres bibliothèques que celle donné ie BIB011.
+Vérifie qu’un abonné spécifique (ie AB017) existe avant de proposer un transfert.
+*/
 SELECT 
   e.ISBN, 
   e.titre, 

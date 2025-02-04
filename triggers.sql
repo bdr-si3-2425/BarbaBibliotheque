@@ -1,3 +1,8 @@
+/*
+Crée une table pour enregistrer l’historique des emprunts.
+Stocke l’action effectuée (BORROW ou RETURN) et la date de l’action.
+*/
+
 CREATE TABLE EmpruntHistory (
   id SERIAL PRIMARY KEY,
   id_emprunt VARCHAR(42),
@@ -9,6 +14,10 @@ CREATE TABLE EmpruntHistory (
   action VARCHAR(10),
   action_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+/*
+Déclare une fonction déclenchée (trigger) qui enregistre chaque nouvel emprunt ou retour.
+*/
 
 CREATE FUNCTION log_emprunt_history() RETURNS TRIGGER AS $$
 BEGIN
@@ -26,6 +35,10 @@ WHEN OTHERS THEN
   RETURN NULL;
 END;
 $$ LANGUAGE plpgsql;
+
+/*
+Active le trigger après chaque ajout ou modification d’un emprunt.
+*/
 
 CREATE TRIGGER emprunt_history_trigger
 AFTER INSERT OR UPDATE ON EMPRUNT

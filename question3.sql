@@ -1,4 +1,10 @@
 /*Quels ouvrages sont fréquemment transférés entre bibliothèques et quels délais sont associés ?*/
+/*
+Analyse la fréquence des transferts d’ouvrages entre bibliothèques.
+Calcule la durée moyenne des transferts.
+Trie par nombre de transferts décroissant.
+*/
+
 SELECT 
   e.ISBN, 
   e.titre, 
