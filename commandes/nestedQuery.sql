@@ -15,7 +15,7 @@ FROM
 JOIN POSSEDE p USING (id_edition)
 JOIN BIBLIOTHEQUE b USING (id_biblio)
 WHERE 
-  e.disponibilite = 'disponible'
+  e.disponibilite = 'Disponible'
   AND e.id_edition NOT IN (
     SELECT 
       em.id_edition
