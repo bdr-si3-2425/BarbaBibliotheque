@@ -190,9 +190,7 @@ INSERT INTO BLACKLIST (id_abonne, date_deb, date_fin) VALUES
 ('AB040', '2025-02-01', '2025-05-01'),
 ('AB001', '2024-10-01', '2025-01-01'),  -- Already ended
 ('AB005', '2025-01-01', '2025-04-01'),  -- Currently active
-('AB010', '2025-03-01', '2025-06-01'),  -- Starts in the future
 ('AB015', '2024-09-15', '2024-12-15'),  -- Already ended
-('AB025', '2025-04-15', '2025-07-15'),  -- Starts in the future
 ('AB030', '2024-11-01', '2025-02-01'),  -- Currently active
 ('AB035', '2025-01-15', '2025-04-15'),  -- Currently active
 ('AB040', '2024-12-01', '2025-03-01');  -- Currently active
@@ -344,12 +342,8 @@ INSERT INTO SOUSCRIT (id_abonne, id_biblio, debut_abonnement, fin_abonnement, so
 ('AB039', 'BIB020', '2023-01-01', '2023-12-31', 'Annuel'),
 ('AB040', 'BIB001', '2023-02-01', '2024-02-01', 'Annuel'),
 ('AB040', 'BIB002', '2023-03-01', '2023-09-01', 'Semestriel'),
-('AB040', 'BIB003', '2023-04-01', '2023-10-01', 'Semestriel'),
-('AB002', 'BIB004', '2025-02-01', '2025-08-01', 'Semestriel'),  -- Future subscription
-('AB010', 'BIB006', '2025-03-01', '2025-09-01', 'Semestriel'),  -- Future subscription
-('AB015', 'BIB008', '2025-04-01', '2025-10-01', 'Semestriel'),  -- Future subscription
-('AB020', 'BIB010', '2025-05-01', '2026-05-01', 'Annuel'),  -- Future subscription
-('AB025', 'BIB012', '2025-06-01', '2026-06-01', 'Annuel'); -- Future subscription
+('AB040', 'BIB003', '2023-04-01', '2023-10-01', 'Semestriel');
+
 
 INSERT INTO TRANSFERT (id_biblio_source, id_biblio_dest, id_edition, date_debut, date_fin, description, cout) VALUES
 ('BIB001', 'BIB002', 'EDT1', '2024-05-01', '2024-05-15', 'Transfert de roman classique', '50'),
@@ -360,7 +354,6 @@ INSERT INTO TRANSFERT (id_biblio_source, id_biblio_dest, id_edition, date_debut,
 ('BIB002', 'BIB001', 'EDT6', '2024-10-05', '2024-10-20', 'Transfert de poésie', '25'),
 ('BIB011', 'BIB012', 'EDT7', '2024-11-10', '2024-11-25', 'Transfert de thriller', '20'),
 ('BIB013', 'BIB014', 'EDT8', '2024-12-15', '2024-12-30', 'Transfert de manuel philosophique', '60'),
-('BIB015', 'BIB016', 'EDT9', '2025-01-01', '2025-01-15', 'Transfert de biographie', '-10'), -- Negative cost
 ('BIB017', 'BIB018', 'EDT10', '2025-02-01', '2025-02-15', 'Transfert de roman de science-fiction', '70'),
 ('BIB005', 'BIB007', 'EDT1', '2023-05-01', '2023-05-15', 'Transfert de roman classique', '90'), -- Multiple editions to the same library
 ('BIB005', 'BIB007', 'EDT3', '2023-06-01', '2023-06-15', 'Transfert de théâtre classique', '110'), -- Multiple editions to the same library
@@ -372,15 +365,15 @@ INSERT INTO TRANSFERT (id_biblio_source, id_biblio_dest, id_edition, date_debut,
 ('BIB018', 'BIB011', 'EDT8', '2023-12-01', '2023-12-15', 'Transfert de manuel philosophique', '105'), -- Future dates
 ('BIB020', 'BIB015', 'EDT9', '2024-01-01', '2024-01-15', 'Transfert de biographie', '115'), 
 ('BIB001', 'BIB012', 'EDT10', '2024-02-01', '2024-02-15', 'Transfert de roman de science-fiction', '95'), 
-('BIB019', 'BIB014', 'EDT1', '2024-03-01', '2024-03-15', 'Transfert de roman classique', '-20'), -- Negative cost
+('BIB007', 'BIB018', 'EDT2', '2024-04-01', '2024-04-15', 'Transfert dessai philosophique', '85'); --end date before start date: edge case problem
 
 INSERT INTO EMPRUNT (id_edition, id_abonne, date_emprunt, date_prevu, date_retour, etat_init, etat_retour)
 VALUES 
  ('EDT1', 'AB001', '2025-01-01', '2025-02-01', '2025-01-20', 'Bon état', 'Bon état'), -- Example 1: Regular borrowing
  ('EDT2', 'AB002', '2025-02-03', '2025-03-01', NULL, 'Neuf', NULL), -- Example 2: Book borrowed and not yet returned
- ('EDT3', 'AB003', '2025-01-10', '2025-02-10', '2025-02-05', 'Bon état', 'Bon état'),
- ('EDT9','AB014', '25-01-10','25-01-25','25-01-25','Bon état', 'Bon état'),
- ('EDT8','AB010','25-01-10','25-01-25','25-01-25','Bon état', 'Bon état'),
+ ('EDT3', 'AB003', '2023-01-10', '2023-02-10', '2023-02-05', 'Bon état', 'Bon état'),
+ ('EDT9','AB014', '2025-01-10','2025-01-25','2025-01-25','Bon état', 'Bon état'),
+ ('EDT8','AB010','2025-01-10','2025-01-25','2025-01-25','Bon état', 'Bon état'),
  ('EDT6', 'AB007', '2025-01-20', '2025-02-20', '2025-02-15', 'Neuf', 'Abîmé'), -- Example 6: Damaged book return
  ('EDT8', 'AB009', '2025-01-01', '2025-06-01', '2025-05-25', 'Neuf', 'Bon état'), -- Example 8: Long borrow duration
  ('EDT9', 'AB010', '2025-01-15', '2025-02-15', '2025-02-05', 'Ancien', 'Ancien'),-- Example 9: Borrowing of a very old edition
