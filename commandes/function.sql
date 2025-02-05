@@ -8,7 +8,7 @@ BEGIN
   SELECT COUNT(*)
   INTO total_borrowed
   FROM EMPRUNT
-  WHERE id_abonne = p_id_abonne;
+  WHERE id_abonne = p_id_abonne and date_retour is not null;
 
   -- Return the total number of books borrowed
   RETURN total_borrowed;
