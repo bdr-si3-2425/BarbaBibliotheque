@@ -14,3 +14,8 @@ BEGIN
   RETURN total_borrowed;
 END;
 $$ LANGUAGE plpgsql;
+
+-- Verify the function's existence
+SELECT proname
+FROM pg_proc
+WHERE proname = 'total_books_borrowed';
