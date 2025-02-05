@@ -37,6 +37,11 @@ AFTER INSERT OR UPDATE ON EMPRUNT
 FOR EACH ROW
 EXECUTE FUNCTION log_emprunt_history();
 
+--Make sure trigger exists
+SELECT tgname
+FROM pg_trigger
+WHERE tgrelid = 'emprunt'::regclass;
+
 -- Insert a new recird into EMPRUNT
 INSERT INTO EMPRUNT (id_edition, id_abonne, date_emprunt, date_prevu, etat_init)
  VALUES ('EDT1', 'AB038', '2023-01-01' , '2023-01-18', 'neuf');
